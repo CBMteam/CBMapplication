@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="식사량 기록"
+        android:text="무엇을 드셨어요?"
         android:textSize="50dp"
         android:textColor="@color/black"/>
 

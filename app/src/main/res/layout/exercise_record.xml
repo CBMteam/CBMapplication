@@ -8,8 +8,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="운동량 기록"
-        android:textSize="50dp"
+        android:text="어떤 운동을 하셨어요?"
+        android:textSize="40dp"
         android:textColor="@color/black"/>
 
     <TextView

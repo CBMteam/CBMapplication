@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:id="@+id/drawerView"
+    android:background="@drawable/button">
+
+    <!--https://lktprogrammer.tistory.com/168
+    나중에 여기서 navigation drawer이용해서 구현 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="반갑습니다"
+        android:textSize="14dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="문지은 님"
+        android:textSize="26dp"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        >
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저혈당 도우미(가제)에 어서오세요"
+        android:textSize="14dp"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff"
+        android:layout_marginTop="70dp">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="혈당 check"
+        android:textColor="#ffffff"
+        android:id="@+id/blood"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="식사량 기록"
+        android:textColor="#ffffff"
+        android:id="@+id/food"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="식사량 기록"
+        android:textColor="#ffffff"
+        android:id="@+id/exercise"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일정"
+        android:textColor="#ffffff"
+        android:id="@+id/calendar"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="약국/마트/편의점 찾기"
+        android:textColor="#ffffff"
+        android:id="@+id/map"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:id="@+id/nav_logout"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="OnClick">
+    </TextView>
+
+
+
+</LinearLayout>
