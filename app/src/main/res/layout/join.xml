@@ -21,6 +21,39 @@
         android:inputType="textPassword"
         android:hint="password"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생년월일"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_gravity="left"/>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dp"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/sex">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여자"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남자"/>
+    </RadioGroup>
+
     <Button
         android:id="@+id/joinBtn2"
         android:layout_marginTop="20dp"
@@ -38,4 +71,5 @@
         android:background="@drawable/cancelbutton"
         android:textColor="#ffffff"
         android:text="뒤로 가기" />
+
 </LinearLayout>
