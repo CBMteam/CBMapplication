@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/basicview">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,43 +16,111 @@
         android:text="일정이 어떻게 되세요?"
         android:textColor="#647dee"
         android:textSize="40dp"
-        android:layout_margin="10dp" />
-
-    <TextView
         android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:text="여기에 달력 api 들어감"
-        android:background="@color/basal_light"
         />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+        <CalendarView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/calendarView"
+            android:showWeekNumber="false"
+            />
+
+    <TextView
+        android:id="@+id/calcontent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        />
 
-        <Button
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addview">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="병원 일정 등록하기"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/button"/>
+            android:text="일정을 추가해주세요."
+            android:textColor="#647dee"
+            android:textSize="40dp"
+            android:layout_margin="10dp"
+            />
 
-        <Button
-            android:layout_width="wrap_content"
+        <TimePicker
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/timePicker1"
+            android:timePickerMode="spinner"/>
+
+        <EditText
+            android:id="@+id/addedit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="약 일정 등록하기"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/button"/>
+            android:layout_margin="10dp"
+            android:hint="내용 입력"
+            />
+
 
     </LinearLayout>
 
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/basicbtnview"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택 날짜 일정 추가"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            android:id="@+id/btnadd"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택 날짜 일정 삭제"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            android:id="@+id/btndel"/>
+
+    </LinearLayout>>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/addbtnview"
+        >
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:id="@+id/btnend"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
