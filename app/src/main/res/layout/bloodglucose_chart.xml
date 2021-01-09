@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="혈당량 그래프"
         android:textSize="50dp"
-        android:textColor="@color/black"/>
+        android:textColor="#647dee"/>
 
     <TextView
         android:layout_margin="10dp"

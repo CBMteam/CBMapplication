@@ -8,27 +8,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="어떤 운동을 하셨어요?"
-        android:textSize="40dp"
-        android:textColor="@color/black"/>
+        android:text="인슐린을 투여하셨나요?"
+        android:textSize="39dp"
+        android:textColor="#647dee"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="운동량"
+        android:text="인슐린 투여량"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 
     <EditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="(무슨 기준으로 할지 아직 못 정함. 시간? 강도?)"
+        android:hint="(인슐린 투여량 단위)"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="운동 시간"
+        android:text="투여 시간"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 

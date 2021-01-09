@@ -8,42 +8,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="무엇을 드셨어요?"
-        android:textSize="50dp"
+        android:text="저혈당 알림 친구 관리"
+        android:textSize="40dp"
         android:textColor="#647dee"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="식사량"
+        android:text="친구 목록"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="탄수화물량(g)"
-        />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_margin="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="식사 시간"
+        android:text="친구 추가"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 
-    <DatePicker
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/dp"
-        android:datePickerMode="spinner"
-        android:calendarViewShown="false"/>
+        android:hint="카카오톡 id"
 
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tp"
-        android:timePickerMode="spinner"/>
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -56,7 +51,7 @@
             android:background="@drawable/button"
             android:textColor="@color/white"
             android:layout_marginRight="20dp"
-            android:text="등록"/>
+            android:text="친구 추가"/>
 
         <Button
             android:id="@+id/cBtn"
