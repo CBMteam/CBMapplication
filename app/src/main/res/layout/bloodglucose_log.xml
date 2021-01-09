@@ -9,16 +9,15 @@
         android:layout_height="wrap_content"
         android:text="혈당량 상세 값"
         android:textSize="50dp"
-        android:textColor="@color/black"/>
+        android:textColor="#647dee"/>
 
-    <TextView
-        android:layout_margin="10dp"
+
+    <ListView
+        android:id="@+id/list"
         android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:text="여기에 혈당량 정확한 값 (로그) 들어감"
-        android:background="@color/basal_light"
-        />
+        android:layout_width="400dp"
+        android:layout_height="550dp"
+        android:layout_margin="10dp"/>
 
     <Button
         android:layout_gravity="center"

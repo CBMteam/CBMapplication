@@ -135,6 +135,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="저혈당 알림 친구 관리"
+        android:textColor="#ffffff"
+        android:id="@+id/friends"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:onClick="OnClick">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80ffffff">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="로그아웃"
         android:textSize="15dp"
         android:textColor="#ffffff"

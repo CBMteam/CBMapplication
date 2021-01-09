@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="무엇을 찾고 계신가요?"
-        android:textColor="@color/black"
+        android:textColor="#647dee"
         android:layout_gravity="center"
         android:textSize="40dp"
         android:layout_margin="10dp" />
