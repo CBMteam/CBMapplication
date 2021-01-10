@@ -1,8 +1,12 @@
 package com.cbm.cbmapplication;
 
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import net.daum.mf.map.api.MapView;
+
 
 public class MapAPItest extends AppCompatActivity {
     @Override
@@ -10,5 +14,9 @@ public class MapAPItest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapapitest);
 
+        MapView mapView = new MapView(this);
+
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
     }
 }
