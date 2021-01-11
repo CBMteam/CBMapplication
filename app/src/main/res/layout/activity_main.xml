@@ -1,45 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version ="1.0" encoding ="utf-8"?><!--  Learn More about how to use App Actions: https://developer.android.com/guide/actions/index.html -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:textColor="#647dee"
+        android:text="저혈당 도우미\n(가제)"
+        android:padding="10dp"
+        />
 
-        <TextView
-            android:id="@+id/txtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:text="저혈당을 미리 알고\n 예방해요"
+        android:padding="20dp"
+        />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카카오톡 API"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="122dp" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="지도 API"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="218dp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="달력 API"
+            android:text="시작하기"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="332dp" />
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
