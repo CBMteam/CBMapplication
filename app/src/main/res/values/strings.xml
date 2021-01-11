@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">XDrip Prefs.</string>
+    <string name="app_name">CBMapplication</string>
 
     <string-array name="chart_timeframe">
         <item>1 hour</item>
@@ -268,4 +268,5 @@
     <string name="ob1_session_restarted_title">Sensor session restarted</string>
     <string name="ob1_session_restarted_msg">The sensor session was preemptively restarted and set to 3 days, please check if next readings are off and calibrate if needed</string>
     <string name="ob1_session_restarted_note">Transmitter session was restarted</string>
+    <string name="kakao_app_key">5b6dca0c093093bba8cff6802ac915a2</string>
 </resources>

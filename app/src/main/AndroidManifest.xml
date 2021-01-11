@@ -16,6 +16,7 @@
 
 
     <application
+        android:name="com.cbm.cbmapplication.GlobalApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="com.kakao.sdk.Appkey" android:value="6153e6b14f785ebc12a20dd128fbe732" />
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,7 +43,9 @@
         <activity android:name=".CalendarAPItest" />
         <activity android:name=".KakaotalkAPItest" />
         <activity android:name=".MapAPItest" />
-
+        <activity android:name=".KakaotalkLogin" />
+        <activity android:name=".GlobalApplication" />
+        <activity android:name=".MenuChoice" />
     </application>
 
 </manifest>
