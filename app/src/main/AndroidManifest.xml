@@ -23,6 +23,9 @@
 
         <meta-data android:name="com.kakao.sdk.Appkey" android:value="6153e6b14f785ebc12a20dd128fbe732" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAben14yL70YF9Ai8nwdUOC3rNLqg2kyDQ" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
