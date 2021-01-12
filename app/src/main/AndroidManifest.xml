@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarAPItest" />
+        <activity android:name=".Calendar" />
         <activity android:name=".KakaotalkAPItest" />
         <activity android:name=".MapAPItest" />
         <activity android:name=".KakaotalkLogin" />

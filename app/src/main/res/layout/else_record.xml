@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/addview">
 
         <TextView
+            android:id="@+id/caltitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="식사를 하셨나요?"
+            android:text="일정을 추가해주세요."
+            android:textColor="#647dee"
             android:textSize="39dp"
-            android:textColor="#647dee"/>
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="투여 시간"
+            android:text="시간 설정"
             android:textColor="@color/black"
             android:textSize="30dp"/>
 
         <TimePicker
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/food_tp"
+            android:layout_width="wrap_content"
+            android:id="@+id/timePicker1"
             android:timePickerMode="spinner"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="식사량"
+            android:text="내용 입력"
             android:textColor="@color/black"
             android:textSize="30dp"/>
 
         <EditText
+            android:id="@+id/addedit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="탄수화물량(g)"
-            android:id="@+id/ins"
+            android:hint="내용 입력"
             />
+
 
     </LinearLayout>
 
@@ -52,27 +55,28 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
-
+        android:layout_centerHorizontal="true"
+        android:id="@+id/addbtnview"
+        >
         <Button
-            android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="등록"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
             android:background="@drawable/button"
-            android:textColor="@color/white"
-            android:layout_marginRight="20dp"
-            android:text="등록"/>
+            android:id="@+id/btnend"/>
 
         <Button
-            android:id="@+id/cBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/cancelbutton"
+            android:text="뒤로 가기"
+            android:layout_margin="20dp"
+            android:padding="20dp"
             android:textColor="@color/white"
-            android:text="뒤로 가기"/>
-
+            android:background="@drawable/cancelbutton"
+            android:id="@+id/btnback"/>
     </LinearLayout>
-
-
 
 </RelativeLayout>
