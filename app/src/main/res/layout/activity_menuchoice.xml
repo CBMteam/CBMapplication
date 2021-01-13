@@ -13,16 +13,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtView"
-            android:textSize="100dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="#647dee"
+            android:text="메뉴 선택"
+            android:padding="10dp"
+            />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="카카오톡 API"
+            android:text="로그아웃"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="122dp" />
 
@@ -39,6 +44,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="달력 API"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="332dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문자 API"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="332dp" />
 

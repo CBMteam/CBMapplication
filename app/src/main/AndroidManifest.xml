@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cbm.cbmapplication">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <uses-permission android:name="android.permission.INTERNET">
     </uses-permission>
 
@@ -46,6 +49,7 @@
         <activity android:name=".KakaotalkLogin" />
         <activity android:name=".GlobalApplication" />
         <activity android:name=".MenuChoice" />
+        <activity android:name=".SendSMS" />
     </application>
 
 </manifest>
