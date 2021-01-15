@@ -50,6 +50,7 @@
         <activity android:name=".GlobalApplication" />
         <activity android:name=".MenuChoice" />
         <activity android:name=".SendSMS" />
+        <activity android:name=".else_record" />
     </application>
 
 </manifest>
