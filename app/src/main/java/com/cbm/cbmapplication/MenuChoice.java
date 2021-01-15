@@ -52,6 +52,16 @@ public class MenuChoice extends AppCompatActivity {
             }
         });
 
+        Button button4 = (Button) findViewById(R.id.button4);
+        button4.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SendSMS.class);
+                startActivity(intent);
+            }
+        });
+
         // txtView.setText(name);
 
 

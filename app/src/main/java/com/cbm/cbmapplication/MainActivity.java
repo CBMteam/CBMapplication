@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         task = new phpDown();
-        txtView = (TextView)findViewById(R.id.txtView);
         task.execute("http://10.0.2.2:80/getuser.php");
 
         Button button4 = (Button) findViewById(R.id.button4);
