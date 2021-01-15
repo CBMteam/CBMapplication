@@ -8,13 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/addview">
+       >
 
         <TextView
             android:id="@+id/caltitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일정을 추가해주세요."
             android:textColor="#647dee"
             android:textSize="39dp"
             />
@@ -56,7 +55,6 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/addbtnview"
         >
         <Button
             android:layout_width="wrap_content"
@@ -68,15 +66,6 @@
             android:background="@drawable/button"
             android:id="@+id/btnend"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="뒤로 가기"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            android:textColor="@color/white"
-            android:background="@drawable/cancelbutton"
-            android:id="@+id/btnback"/>
     </LinearLayout>
 
 </RelativeLayout>
