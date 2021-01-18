@@ -62,6 +62,17 @@ public class MenuChoice extends AppCompatActivity {
             }
         });
 
+        Button button5 = (Button) findViewById(R.id.chartBtn);
+        button5.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                System.out.println("버튼누름");
+                Intent intent = new Intent(getApplicationContext(), Chart.class);
+                startActivity(intent);
+            }
+        });
+
         // txtView.setText(name);
 
 

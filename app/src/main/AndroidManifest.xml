@@ -53,6 +53,7 @@
         <activity android:name=".MenuChoice" />
         <activity android:name=".SendSMS" />
         <activity android:name=".else_record" />
+        <activity android:name=".Chart" />
     </application>
 
 </manifest>
