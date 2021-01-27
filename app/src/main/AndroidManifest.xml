@@ -48,12 +48,12 @@
         <activity android:name=".Calendar" />
         <activity android:name=".KakaotalkAPItest" />
         <activity android:name=".MapAPItest" />
-        <activity android:name=".LoginJoinSelectPage" />
+        <activity android:name=".KakaotalkLogin" />
         <activity android:name=".GlobalApplication" />
         <activity android:name=".MenuChoice" />
         <activity android:name=".SendSMS" />
         <activity android:name=".else_record" />
-        <activity android:name=".JoinPage" />
+        <activity android:name=".Chart" />
     </application>
 
 </manifest>
