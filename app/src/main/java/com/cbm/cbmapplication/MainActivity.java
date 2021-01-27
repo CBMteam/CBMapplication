@@ -1,6 +1,5 @@
 package com.cbm.cbmapplication;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cbm.cbmapplication.item.ListItem;
-import com.kakao.auth.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +27,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Map;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), KakaotalkLogin.class);
+                Intent intent = new Intent(getApplicationContext(), LoginJoinSelectPage.class);
                 startActivity(intent);
             }
         });
