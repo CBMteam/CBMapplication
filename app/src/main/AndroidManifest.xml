@@ -55,6 +55,7 @@
         <activity android:name=".else_record" />
         <activity android:name=".Chart" />
         <activity android:name=".JoinPage" />
+        <activity android:name=".Model" />
     </application>
 
 </manifest>
