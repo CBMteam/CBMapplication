@@ -29,6 +29,10 @@ android {
             universalApk false
         }
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
 }
 
 repositories {
@@ -50,4 +54,9 @@ dependencies {
 
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite:+'
 }
+
