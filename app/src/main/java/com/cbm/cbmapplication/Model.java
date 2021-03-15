@@ -6,11 +6,14 @@ import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.lite.Interpreter;
+import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
@@ -18,12 +21,34 @@ import java.nio.channels.FileChannel;
 
 public class Model extends AppCompatActivity {
 
+    TextView result;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.model);
 
-        Interpreter tflite = getTfliteInterpreter("app/src/main/res/model.tflite");
+        result = (TextView)findViewById(R.id.machine_learning_result);
+
+        //db에서 받아온 시퀀스 전처리
+        //float[][] input = new float[301][4];
+        //float[][] output = new float[301][1];
+
+        double[] input = {0.28328612, 0., 0.10096566, 0.};
+        double[] output = new double[1];
+
+        System.out.println(Model.this);
+
+        //모델 불러오기
+        Interpreter tflite = getTfliteInterpreter("model.tflite");
+
+        //input shape : [(none, 301, 4)]
+        //output shape : [(none, 301, 1)]
+        tflite.run(input, output);
+
+        System.out.println(output);
+
+        result.setText(output.toString());
     }
 
     //모델명을 입력 받아서 메모리로 가져옴
@@ -42,10 +67,9 @@ public class Model extends AppCompatActivity {
             return new Interpreter(loadModelFile(Model.this, modelPath));
         }
         catch (Exception e) {
+            System.out.println("비었습니다");
             e.printStackTrace();
         }
         return null;
     }
-
-
 }
