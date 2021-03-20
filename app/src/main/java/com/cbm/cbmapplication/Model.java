@@ -22,6 +22,7 @@ import java.nio.channels.FileChannel;
 public class Model extends AppCompatActivity {
 
     TextView result;
+    private String IP_ADDRESS = "223.194.46.209";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -30,20 +31,23 @@ public class Model extends AppCompatActivity {
 
         result = (TextView)findViewById(R.id.machine_learning_result);
 
-        //db에서 받아온 시퀀스 전처리
-        //float[][] input = new float[301][4];
-        //float[][] output = new float[301][1];
+        
 
-        double[] input = {0.28328612, 0., 0.10096566, 0.};
-        double[] output = new double[1];
+        //db에서 받아온 시퀀스 전처리
+        //float[][] input = new float[311][4];
+        //float[][] output = new float[311][1];
+
+        float[][][] input = new float[1][311][4];
+        float[][][] output = new float[1][311][1];
 
         System.out.println(Model.this);
 
         //모델 불러오기
         Interpreter tflite = getTfliteInterpreter("model.tflite");
+        if (tflite == null) System.out.println("모델 못 가져옴");
 
-        //input shape : [(none, 301, 4)]
-        //output shape : [(none, 301, 1)]
+        //input shape : [(none, 311, 4)]
+        //output shape : [(none, 311, 1)]
         tflite.run(input, output);
 
         System.out.println(output);
@@ -67,9 +71,10 @@ public class Model extends AppCompatActivity {
             return new Interpreter(loadModelFile(Model.this, modelPath));
         }
         catch (Exception e) {
-            System.out.println("비었습니다");
             e.printStackTrace();
         }
         return null;
     }
+
+
 }
