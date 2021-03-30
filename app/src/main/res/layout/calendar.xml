@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/lay1"
         >
 
     <TextView
@@ -17,6 +18,7 @@
         android:textColor="#647dee"
         android:textSize="40dp"
         android:layout_margin="10dp"
+
         />
 
         <CalendarView
@@ -26,14 +28,23 @@
             android:showWeekNumber="false"
             />
 
-    <TextView
-        android:id="@+id/calcontent"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="20dp"
-        />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_below="@+id/lay1"
+        android:layout_above="@+id/lay3"
+        android:layout_centerHorizontal="true"
+        >
 
+        <ListView
+            android:id="@+id/callist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 
 
@@ -44,6 +55,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:id="@+id/lay3"
         >
 
         <Button
@@ -68,6 +80,5 @@
             android:id="@+id/btndel"/>
 
     </LinearLayout>>
-
 
 </RelativeLayout>
