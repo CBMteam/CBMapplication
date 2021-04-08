@@ -3,6 +3,9 @@
 
     <string name="app_name">CBMapplication</string>
 
+    <string name="dojoin">회원이 아니신가요? <u>회원가입하기</u></string>
+    <string name="dologin">회원이신가요? <u>로그인하기</u></string>
+
     <string-array name="chart_timeframe">
         <item>1 hour</item>
         <item>2 hours</item>

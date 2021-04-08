@@ -2,40 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="@drawable/bg_maingradient"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:textColor="#647dee"
-        android:text="저혈당 도우미\n(가제)"
-        android:padding="10dp"
-        />
+        android:layout_weight="2"
+        android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="30dp"
-        android:text="저혈당을 미리 알고\n 예방해요"
-        android:padding="20dp"
-        />
-
-
-
-        <Button
-            android:id="@+id/button4"
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시작하기"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="332dp" />
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_logo_white" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="저혈당 도우미"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="저혈당을 미리 알고 예방하는\n당뇨병 환자를 위한 도우미 앱"
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="4">
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_mainstart"
+        android:text="시작하기"
+        android:textColor="#723E81"
+        android:layout_weight="2"
+        android:textSize="20dp" />
+    </LinearLayout>
+</LinearLayout>
