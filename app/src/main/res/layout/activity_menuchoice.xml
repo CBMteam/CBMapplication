@@ -38,7 +38,7 @@
 
         <FrameLayout
             android:layout_width="300dp"
-            android:layout_height="350dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal">
 
         </FrameLayout>
@@ -87,6 +87,7 @@
                         </LinearLayout>
 
                         <ImageButton
+                            android:id="@+id/button3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/bg_mainmenubox"
@@ -123,6 +124,7 @@
                         </LinearLayout>
 
                         <ImageButton
+                            android:id="@+id/button2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/bg_mainmenubox"
@@ -202,6 +204,7 @@
                         </LinearLayout>
 
                         <ImageButton
+                            android:id="@+id/button"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/bg_mainmenubox"
@@ -212,29 +215,6 @@
             </TableLayout>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="122dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="지도 API"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="218dp" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="달력 API"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="332dp" />
 
         <Button
             android:id="@+id/button4"

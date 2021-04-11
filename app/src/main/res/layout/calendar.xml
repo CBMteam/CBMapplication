@@ -11,22 +11,53 @@
         android:id="@+id/lay1"
         >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일정이 어떻게 되세요?"
-        android:textColor="#647dee"
-        android:textSize="40dp"
-        android:layout_margin="10dp"
-
-        />
-
-        <CalendarView
-            android:layout_height="match_parent"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/calendarView"
-            android:showWeekNumber="false"
-            />
+            android:layout_height="wrap_content"
+            android:paddingLeft="17dp"
+            android:paddingTop="22dp">
+
+            <ImageButton
+                android:id="@+id/btn_map_goback"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_previous"
+                android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="left"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="#564283"
+                    android:text="일정과 기록"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#564283"
+                    android:text="일정/식사/투여량이 어떻게 되세요?"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    <CalendarView
+        android:layout_height="300dp"
+        android:layout_width="310dp"
+        android:id="@+id/calendarView"
+        android:layout_gravity="center"
+        android:showWeekNumber="false"
+        />
 
     </LinearLayout>
 

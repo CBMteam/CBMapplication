@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class MenuChoice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuchoice);
 
-        Button button = (Button) findViewById(R.id.button);
+        ImageButton button = (ImageButton) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -31,7 +32,7 @@ public class MenuChoice extends AppCompatActivity {
             }
         });
 
-        Button button2 = (Button) findViewById(R.id.button2);
+        ImageButton button2 = (ImageButton) findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -42,7 +43,7 @@ public class MenuChoice extends AppCompatActivity {
         });
 
 
-        Button button3 = (Button) findViewById(R.id.button3);
+        ImageButton button3 = (ImageButton) findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
 
             @Override
