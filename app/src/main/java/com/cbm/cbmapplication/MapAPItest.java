@@ -1,10 +1,13 @@
 package com.cbm.cbmapplication;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -54,6 +57,8 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
     // 지도의 표시한 마커(주변장소표시)를 관리하는 객체를 담을 리스트
     ArrayList<Marker> markers_list;
 
+    ImageButton btn_map_goback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +69,22 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
 
         radioGroup = (RadioGroup) findViewById(R.id.grp) ;
         radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+        btn_map_goback = (ImageButton) findViewById(R.id.btn_map_goback);
 
         lat_list=new ArrayList<>();
         lng_list=new ArrayList<>();
         name_list=new ArrayList<>();
         vicinity_list=new ArrayList<>();
         markers_list=new ArrayList<>();
+
+        btn_map_goback.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MenuChoice.class);
+                startActivity(intent);
+            }
+        });
     }
 
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
@@ -97,6 +112,7 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
             }
         }
     };
+
 
 
     //타입에 맞는 근처 장소 가져옴
