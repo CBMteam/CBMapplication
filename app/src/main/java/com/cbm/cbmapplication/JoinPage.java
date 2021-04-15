@@ -12,12 +12,20 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class JoinPage  extends AppCompatActivity {
 
@@ -60,11 +68,32 @@ public class JoinPage  extends AppCompatActivity {
                 String birth = et_birth.getYear() + "-" + et_birth.getMonth() + "-" + et_birth.getDayOfMonth();
                 String passwd = et_passwd.getText().toString();
                 String weight = et_weight.getText().toString();
+                //fcm 기기의 토큰값과 이메일 값 전달
+                String token= FirebaseInstanceId.getInstance().getToken();
+                Log.d("fcmtoken",token);
 
 
                 JoinPage.JoinTask task = new JoinPage.JoinTask(JoinPage.this);
 
-                task.execute("http://" + IP_ADDRESS + "/join.php", email, passwd, birth, weight);
+                task.execute("http://" + IP_ADDRESS + "/join.php", email,passwd, birth, weight, token);
+
+                /*OkHttpClient client = new OkHttpClient();
+                RequestBody body = new FormBody.Builder()
+                        .add("Token", token)
+                        .add("email",email)
+                        .build();
+
+                //request
+                Request request = new Request.Builder()
+                        .url("http://" + IP_ADDRESS + "/login.php")
+                        .post(body)
+                        .build();
+
+                try {
+                    client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
 
                 Intent intent = new Intent(getApplicationContext(), LoginJoinSelectPage.class);
                 startActivity(intent);
@@ -111,7 +140,9 @@ public class JoinPage  extends AppCompatActivity {
             String user_email = (String) params[1];
             String user_pw = (String) params[2];
             String user_birth = (String) params[3];
-            String user_weight = (String) params[4];
+            String user_weight= (String) params[4];
+            String user_token=(String) params[5];
+
 
             // HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 합니다.
             // 전송할 데이터는 “이름=값” 형식이며 여러 개를 보내야 할 경우에는 항목 사이에 &를 추가합니다.
@@ -119,7 +150,7 @@ public class JoinPage  extends AppCompatActivity {
 
             // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
             // ex : String postParameters = "name=" + name + "&country=" + country;
-            String postParameters = "email=" + user_email + "&passwd=" + user_pw + "&birth=" + user_birth + "&weight=" + user_weight;
+            String postParameters = "email=" + user_email + "&passwd=" + user_pw + "&birth="+ user_birth + "&weight=" + user_weight +"&token=" + user_token ;
 
             Log.d(TAG, postParameters);
 
