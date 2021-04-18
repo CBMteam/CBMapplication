@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -37,6 +38,8 @@ public class JoinPage  extends AppCompatActivity {
     private DatePicker et_birth;
     private EditText et_weight;
     private String IP_ADDRESS = "223.194.46.209";
+
+    DialogGroup dialogGroup = new DialogGroup();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +68,34 @@ public class JoinPage  extends AppCompatActivity {
             public void onClick(View view) {
 
                 String email = et_email.getText().toString();
-                String birth = et_birth.getYear() + "-" + et_birth.getMonth() + "-" + et_birth.getDayOfMonth();
+                String birth = et_birth.getYear() + "-" + (et_birth.getMonth()+1) + "-" + et_birth.getDayOfMonth();
                 String passwd = et_passwd.getText().toString();
                 String weight = et_weight.getText().toString();
+
                 //fcm 기기의 토큰값과 이메일 값 전달
                 String token= FirebaseInstanceId.getInstance().getToken();
                 Log.d("fcmtoken",token);
 
+                if (email.length() == 0 || birth.length() == 0 || passwd.length() == 0 || weight.length() == 0){
+                    dialogGroup.dialogNotCompleteForm(JoinPage.this);
+                    return;
+                }
 
                 JoinPage.JoinTask task = new JoinPage.JoinTask(JoinPage.this);
 
-                task.execute("http://" + IP_ADDRESS + "/join.php", email,passwd, birth, weight, token);
+                try {
+                    String result = task.execute("http://" + IP_ADDRESS + "/join.php", email,passwd, birth, weight, token).get();
+
+                    if (result.equals("failure")){
+                        dialogGroup.dialogJoinDuplicateId(JoinPage.this);
+                        return;
+                    }
+
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 /*OkHttpClient client = new OkHttpClient();
                 RequestBody body = new FormBody.Builder()

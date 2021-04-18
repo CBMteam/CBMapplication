@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     TextView txtView;
     phpDown task;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                     passwd = jo.getString("passwd");
                     type = jo.getString("type");
                     listItem.add(new ListItem(id,passwd,type));
-
                 }
             }catch(JSONException e){
                 e.printStackTrace();

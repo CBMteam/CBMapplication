@@ -46,6 +46,8 @@ public class LoginJoinSelectPage extends AppCompatActivity {
     private EditText et_passwd;
     private String IP_ADDRESS = "223.194.46.209";
 
+    DialogGroup dialogGroup = new DialogGroup();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,12 @@ public class LoginJoinSelectPage extends AppCompatActivity {
 
                 String user_email = et_email.getText().toString();
                 String user_pw = et_passwd.getText().toString();
+
+
+                if (user_email.length()==0 || user_pw.length() == 0){
+                    dialogGroup.dialogNotCompleteForm(LoginJoinSelectPage.this);
+                    return;
+                }
 
                 InsertLoginTask task = new InsertLoginTask(LoginJoinSelectPage.this);
                 try {
@@ -119,8 +127,10 @@ public class LoginJoinSelectPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             Log.d(TAG, "POST response  - " + result);
+            if (result.equals("notOK")){
+                dialogGroup.dialogWrongLogin(mContext);
+            }
         }
 
 
