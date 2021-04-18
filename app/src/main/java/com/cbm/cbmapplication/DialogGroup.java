@@ -41,4 +41,21 @@ public class DialogGroup {
                 .show();
     }
 
+    public void dialogJoinDuplicateId(Context context){
+        AlertDialog.Builder oDialog = new AlertDialog.Builder(context,
+                android.R.style.Theme_DeviceDefault_Light_Dialog);
+
+        oDialog.setMessage("이미 있는 아이디입니다.\n다른 아이디를 사용해주세요.")
+                .setTitle("아이디 중복")
+                .setNeutralButton("확인", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+                    }
+                })
+                .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                .show();
+    }
+
 }
