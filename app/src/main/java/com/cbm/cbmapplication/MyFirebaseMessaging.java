@@ -27,18 +27,12 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         //sendNotification(remoteMessage.getData().get("message"));
         sendNotification(
                 remoteMessage.getData().get("title"),
-                remoteMessage.getData().get("message"),
-                remoteMessage.getData().get("link")
+                remoteMessage.getData().get("message")
         );
     }
 
-    private void sendNotification(String title, String messageBody, String link) {
+    private void sendNotification(String title, String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
-
-        //Log.d("start_link=", link);
-        Bundle bundle = new Bundle();
-        bundle.putString("url", link);
-        intent.putExtras(bundle);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -55,7 +49,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
+  
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }
