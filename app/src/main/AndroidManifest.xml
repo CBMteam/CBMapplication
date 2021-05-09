@@ -58,7 +58,9 @@
         <activity android:name=".Model" />
         <service
             android:name=".MyFirebaseMessaging"
-            android:stopWithTask="false">
+            android:stopWithTask="false"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>

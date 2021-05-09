@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kakao.auth.ApiErrorCode;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
@@ -65,6 +66,10 @@ public class LoginJoinSelectPage extends AppCompatActivity {
                 String user_email = et_email.getText().toString();
                 String user_pw = et_passwd.getText().toString();
 
+                //fcm 기기의 토큰값과 이메일 값 전달
+                String token= FirebaseInstanceId.getInstance().getToken();
+                Log.d("fcmtoken",token);
+
 
                 if (user_email.length()==0 || user_pw.length() == 0){
                     dialogGroup.dialogNotCompleteForm(LoginJoinSelectPage.this);
@@ -74,7 +79,7 @@ public class LoginJoinSelectPage extends AppCompatActivity {
                 InsertLoginTask task = new InsertLoginTask(LoginJoinSelectPage.this);
                 try {
 
-                    String result = task.execute("http://" + IP_ADDRESS + "/login.php", user_email,user_pw).get();
+                    String result = task.execute("http://" + IP_ADDRESS + "/login.php", user_email,user_pw,token).get();
 
 
                     if (result.equals("OK")){
@@ -144,6 +149,7 @@ public class LoginJoinSelectPage extends AppCompatActivity {
             // 1. PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비합니다.
             String user_email = (String) params[1];
             String user_pw = (String) params[2];
+            String user_token = (String) params[3];
 
             // HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 합니다.
             // 전송할 데이터는 “이름=값” 형식이며 여러 개를 보내야 할 경우에는 항목 사이에 &를 추가합니다.
@@ -151,7 +157,7 @@ public class LoginJoinSelectPage extends AppCompatActivity {
 
             // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
             // ex : String postParameters = "name=" + name + "&country=" + country;
-            String postParameters = "email=" + user_email + "&passwd=" + user_pw;
+            String postParameters = "email=" + user_email + "&passwd=" + user_pw + "&token="+user_token;
 
 
             Log.d(TAG, postParameters);
