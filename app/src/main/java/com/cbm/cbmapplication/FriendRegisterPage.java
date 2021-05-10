@@ -6,9 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,19 +36,36 @@ public class  FriendRegisterPage extends AppCompatActivity {
 
     DialogGroup dialogGroup = new DialogGroup();
     ImageButton btn_friend_goback;
+    private ArrayAdapter adapter;
+    private ListView lv_friendlist;
 
-    ArrayList friend_list = new ArrayList();
+    FriendCustomAdapter fcAdapter;
+
+    ArrayList<String> friend_list = new ArrayList<>();
+    ArrayList<Integer> friendicon_list = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_friendregister);
+        lv_friendlist=(ListView)findViewById(R.id.lv_friendlist);
 
         btn_friend_goback = (ImageButton) findViewById(R.id.btn_friend_goback);
 
         btn_searchid = (ImageButton) findViewById(R.id.btn_searchid);
         et_searchfriend = (EditText) findViewById(R.id.et_searchfriend);
+
+        FriendRegisterPage.getFriendListTask getFriendTask = new FriendRegisterPage.getFriendListTask(FriendRegisterPage.this);
+
+        try {
+            String getFriendResult = getFriendTask.execute("http://" + IP_ADDRESS + "/getfriendlist.php", "1").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         btn_friend_goback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +85,6 @@ public class  FriendRegisterPage extends AppCompatActivity {
                 if (searchfriend_email.length()==0){
                     dialogGroup.dialogNotCompleteForm(FriendRegisterPage.this);
                     return;
-                }
-
-                FriendRegisterPage.getFriendListTask task2 = new FriendRegisterPage.getFriendListTask(FriendRegisterPage.this);
-
-                try {
-                    String result2 = task2.execute("http://" + IP_ADDRESS + "/getfriendlist.php", "1").get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
 
                 FriendRegisterPage.CheckFriendTask task = new FriendRegisterPage.CheckFriendTask(FriendRegisterPage.this);
@@ -280,7 +288,7 @@ public class  FriendRegisterPage extends AppCompatActivity {
 
             // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
             // ex : String postParameters = "name=" + name + "&country=" + country;
-            String postParameters = "user_email=1";
+            String postParameters = "user_email="+user_email;
 
             Log.d(TAG, postParameters);
 
@@ -343,10 +351,10 @@ public class  FriendRegisterPage extends AppCompatActivity {
 
     private void showResult(String mJsonString) {
 
-        if (friend_list.isEmpty() == false) {
-            friend_list.clear();
-            //adapter.boards.clear();
-        }
+//        if (friend_list.isEmpty() == false) {
+//            friend_list.clear();
+//            adapter.boards.clear();
+//        }
 
 
         String TAG_JSON = "friend_list"; //어레이 이름
@@ -365,6 +373,10 @@ public class  FriendRegisterPage extends AppCompatActivity {
                 String friend_email = item.getString(TAG_FRIEND_EMAIL);
 
                 friend_list.add(friend_email);
+                friendicon_list.add(R.drawable.ic_friendeach);
+                Log.e("TAG", "showResult: "+friend_email);
+
+
 
                 //Log.e("abc", "showResult: "+friend_email);
 
@@ -374,7 +386,11 @@ public class  FriendRegisterPage extends AppCompatActivity {
             //Log.d(TAG, "showResult : ", e);
         }
 
-        //listview.setAdapter(adapter);
+        String[] friend_list_convert = friend_list.toArray(new String[0]);
+        Integer[] friendicon_list_convert = friendicon_list.toArray(new Integer[0]);
+
+        fcAdapter = new FriendCustomAdapter(getApplicationContext(), friend_list_convert, friendicon_list_convert);
+        lv_friendlist.setAdapter(fcAdapter);
         //adapter.getItemList(board_list);
 
     }
