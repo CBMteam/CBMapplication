@@ -48,6 +48,7 @@ public class Calendar extends AppCompatActivity {
     String content;
     private int REQUEST=1;
     ImageButton btn_cal_goback;
+    String user_email;
 
     private String IP_ADDRESS="223.194.46.209";
 
@@ -58,6 +59,9 @@ public class Calendar extends AppCompatActivity {
 
         //Adapter 생성
         adapter=new ListViewAdpater();
+
+
+        user_email = PreferenceManager.getString(getApplicationContext(), "user_email");
 
         btnadd=findViewById(R.id.btnadd);//일정 추가 버튼
         btndel=findViewById(R.id.btndel); //일정 삭제 버튼

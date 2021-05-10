@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -31,7 +32,9 @@ public class else_record extends AppCompatActivity {
     Button btnend;
     TextView caltitle;
     String choice,kind;
+    ImageButton btn_record_goback;
     int selectYear,selectMonth,selectDay,selectHour,selectmin;
+    String user_email;
 
     //DB
     String IP_ADDRESS="223.194.46.209";//안드에서는 localhost 쓰려면 127.0.0.1 이 아니고 10.0.2.2
@@ -64,6 +67,8 @@ public class else_record extends AppCompatActivity {
         tPicker=findViewById(R.id.timePicker1);//타임 피커
         btnend=findViewById(R.id.btnend);
         caltitle=findViewById(R.id.caltitle);
+
+        user_email = PreferenceManager.getString(getApplicationContext(), "user_email");
 
         Intent intent1=getIntent();
 
@@ -122,6 +127,17 @@ public class else_record extends AppCompatActivity {
                 setResult(RESULT_OK,intent2);
                 finish();
 
+            }
+        });
+
+        btn_record_goback = (ImageButton) findViewById(R.id.btn_record_goback);
+
+        btn_record_goback.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Calendar.class);
+                startActivity(intent);
             }
         });
 

@@ -3,6 +3,7 @@ package com.cbm.cbmapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.Toast;
 
 public class DialogGroup {
@@ -58,7 +59,7 @@ public class DialogGroup {
                 .show();
     }
 
-    public void friendRegisterComplete(Context context){
+    public void friendRegisterComplete(final Context context){
         AlertDialog.Builder oDialog = new AlertDialog.Builder(context,
                 android.R.style.Theme_DeviceDefault_Light_Dialog);
 

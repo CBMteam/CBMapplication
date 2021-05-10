@@ -83,6 +83,7 @@ public class LoginJoinSelectPage extends AppCompatActivity {
 
 
                     if (result.equals("OK")){
+                        PreferenceManager.setString(getApplicationContext(), "user_email", user_email);
                         Intent intent = new Intent(getApplicationContext(), MenuChoice.class);
                         startActivity(intent);
                     }

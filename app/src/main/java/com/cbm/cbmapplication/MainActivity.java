@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListItem> listItem = new ArrayList<ListItem>();
     TextView txtView;
-    phpDown task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        task = new phpDown();
-        task.execute("http://10.0.2.2:80/getuser.php");
 
         Button button4 = (Button) findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
@@ -81,56 +78,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    private class phpDown extends AsyncTask<String, Integer,String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            StringBuilder jsonHtml = new StringBuilder();
-            try{
-                URL url = new URL(urls[0]);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                if(conn != null){
-                    conn.setConnectTimeout(10000);
-                    conn.setUseCaches(false);
-                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                        for(;;){
-                            String line = br.readLine();
-                            if(line == null) break;
-                            jsonHtml.append(line + "\n");
-                        }
-                        br.close();
-                    }
-                    conn.disconnect();
-                }
-            } catch(Exception ex){
-                ex.printStackTrace();
-            }
-            return jsonHtml.toString();
-        }
-
-        protected void onPostExecute(String str){
-            String id;
-            String passwd;
-            String type;
-            try{
-                JSONObject root = new JSONObject(str);
-                JSONArray ja = root.getJSONArray("results");
-                for(int i=0; i<ja.length(); i++){
-                    JSONObject jo = ja.getJSONObject(i);
-                    id = jo.getString("id");
-                    passwd = jo.getString("passwd");
-                    type = jo.getString("type");
-                    listItem.add(new ListItem(id,passwd,type));
-                }
-            }catch(JSONException e){
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-
 
 }

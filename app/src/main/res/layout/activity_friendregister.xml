@@ -77,7 +77,6 @@
                     android:background="@drawable/bg_loginedit"
                     android:ems="10"
                     android:hint="등록할 email을 입력하세요"
-                    android:inputType="textPassword"
                     android:paddingLeft="10dp" />
 
                 <ImageButton

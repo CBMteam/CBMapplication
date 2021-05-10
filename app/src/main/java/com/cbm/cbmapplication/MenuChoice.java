@@ -1,5 +1,6 @@
 package com.cbm.cbmapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,14 +24,19 @@ public class MenuChoice extends AppCompatActivity {
     private LineChart chart;
     TextView ml_tteresult;
     Intent intent = getIntent();
+    Context mContext = this;
 
     // String name = intent.getStringExtra("name");
+
+    String user_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuchoice);
+
+        user_email = PreferenceManager.getString(mContext, "user_email");
 
         ml_tteresult = (TextView) findViewById(R.id.ml_tteresult);
         ml_tteresult.setText((int)(Math.random()*100)+" 분 뒤");

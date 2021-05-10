@@ -250,7 +250,7 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
                 if (location != null) {
                     currentLocation = location;
                     System.out.println("현재 위치 값 "+currentLocation.getLatitude()+", "+currentLocation.getLongitude());
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     assert supportMapFragment != null;
                     supportMapFragment.getMapAsync(MapAPItest.this);

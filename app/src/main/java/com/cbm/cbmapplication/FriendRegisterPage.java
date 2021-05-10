@@ -44,6 +44,7 @@ public class  FriendRegisterPage extends AppCompatActivity {
     ArrayList<String> friend_list = new ArrayList<>();
     ArrayList<Integer> friendicon_list = new ArrayList<>();
 
+    String user_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,11 @@ public class  FriendRegisterPage extends AppCompatActivity {
         btn_searchid = (ImageButton) findViewById(R.id.btn_searchid);
         et_searchfriend = (EditText) findViewById(R.id.et_searchfriend);
 
+        user_email = PreferenceManager.getString(getApplicationContext(), "user_email");
         FriendRegisterPage.getFriendListTask getFriendTask = new FriendRegisterPage.getFriendListTask(FriendRegisterPage.this);
 
         try {
-            String getFriendResult = getFriendTask.execute("http://" + IP_ADDRESS + "/getfriendlist.php", "1").get();
+            String getFriendResult = getFriendTask.execute("http://" + IP_ADDRESS + "/getfriendlist.php", user_email).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -90,10 +92,12 @@ public class  FriendRegisterPage extends AppCompatActivity {
                 FriendRegisterPage.CheckFriendTask task = new FriendRegisterPage.CheckFriendTask(FriendRegisterPage.this);
                 try {
 
-                    String result = task.execute("http://" + IP_ADDRESS + "/checkuser.php", "1", searchfriend_email).get();
+                    String result = task.execute("http://" + IP_ADDRESS + "/checkuser.php", user_email, searchfriend_email).get();
 
                     if (result.equals("success")){
-                        dialogGroup.friendRegisterComplete(FriendRegisterPage.this);
+                        Intent intent = new Intent(getApplicationContext(), FriendRegisterPage.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
                     }
                     else if (result.equals("noSuchEmail")){
                         dialogGroup.findFriendEmailError(FriendRegisterPage.this);
