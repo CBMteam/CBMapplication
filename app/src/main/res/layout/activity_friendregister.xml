@@ -49,35 +49,64 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="center"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            >
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_searchfriend"
-                android:layout_width="270dp"
-                android:layout_height="40dp"
-                android:ems="10"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_loginedit"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:hint="등록할 email을 입력하세요"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/btn_searchid"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/ic_search"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_searchfriend"
+                    android:layout_width="270dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_loginedit"
+                    android:ems="10"
+                    android:hint="등록할 email을 입력하세요"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_searchid"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_search" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
+
+        <ListView
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="40dp"
+            android:id="@+id/lv_friendlist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/material_blue_grey_800"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false" />
 
     </LinearLayout>
 

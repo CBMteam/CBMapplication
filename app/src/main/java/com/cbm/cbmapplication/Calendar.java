@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -45,6 +47,7 @@ public class Calendar extends AppCompatActivity {
     String send;
     String content;
     private int REQUEST=1;
+    ImageButton btn_cal_goback;
 
     private String IP_ADDRESS="223.194.46.209";
 
@@ -158,6 +161,19 @@ public class Calendar extends AppCompatActivity {
                 dlg2.show();
             }
         });
+
+
+        btn_cal_goback = (ImageButton) findViewById(R.id.btn_cal_goback);
+
+        btn_cal_goback.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MenuChoice.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

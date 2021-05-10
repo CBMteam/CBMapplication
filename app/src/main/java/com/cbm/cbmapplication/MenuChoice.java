@@ -65,16 +65,6 @@ public class MenuChoice extends AppCompatActivity {
             }
         });
 
-        Button button4 = (Button) findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SendSMS.class);
-                startActivity(intent);
-            }
-        });
-
         ImageButton btn_registfriend = (ImageButton) findViewById(R.id.btn_registfriend);
         btn_registfriend.setOnClickListener(new View.OnClickListener() {
 
@@ -85,15 +75,6 @@ public class MenuChoice extends AppCompatActivity {
             }
         });
 
-        Button button6 = (Button) findViewById(R.id.modelBtn);
-        button6.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Model.class);
-                startActivity(intent);
-            }
-        });
 
         // txtView.setText(name);
 
