@@ -34,12 +34,12 @@ public class MenuChoice extends AppCompatActivity {
 
         ml_tteresult = (TextView) findViewById(R.id.ml_tteresult);
         ml_tteresult.setText((int)(Math.random()*100)+" 분 뒤");
-        ImageButton button = (ImageButton) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton btn_logout = (ImageButton) findViewById(R.id.logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), KakaotalkAPItest.class);
+                Intent intent = new Intent(getApplicationContext(), LoginJoinSelectPage.class);
                 startActivity(intent);
             }
         });
@@ -71,6 +71,16 @@ public class MenuChoice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendSMS.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton btn_registfriend = (ImageButton) findViewById(R.id.btn_registfriend);
+        btn_registfriend.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FriendRegisterPage.class);
                 startActivity(intent);
             }
         });
