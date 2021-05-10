@@ -56,6 +56,7 @@
         <activity android:name=".Chart" />
         <activity android:name=".JoinPage" />
         <activity android:name=".Model" />
+        <activity android:name=".FriendRegisterPage" />
         <service
             android:name=".MyFirebaseMessaging"
             android:stopWithTask="false">
