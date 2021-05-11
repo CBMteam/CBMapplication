@@ -107,21 +107,16 @@ public class else_record extends AppCompatActivity {
                         +Integer.toString(selectDay)+" "+Integer.toString(selectHour)+":"+Integer.toString(selectmin)+":"+"00";
 
                 //일정 내용 받아오기
-                String carb=addedit.getText().toString();
-                String email="guswl9_9@naver.com";
+                String value=addedit.getText().toString();
 
                 else_record.ElseTask task=new else_record.ElseTask(else_record.this);
 
-               // if(choice.equals("인슐린")){
-                task.execute("http://"+IP_ADDRESS+"/carbinsert.php",email,carb,date);
-               // }
-               // else if(choice.equals("식사량")){
-
-               // }
-               // else{
-                //    caltitle.setText("일정을 입력하세요.");
-                 //   kind="else";
-               // }
+               if(choice.equals("인슐린")){
+                   task.execute("http://"+IP_ADDRESS+"/carbinsert.php",user_email,value,date);
+               }
+               else if(choice.equals("식사량")){
+                   task.execute("http://"+IP_ADDRESS+"/insulininsert.php",user_email,value,date);
+               }
 
                 //일정 추가 완료시 원래 화면으로
                 setResult(RESULT_OK,intent2);
@@ -177,7 +172,7 @@ public class else_record extends AppCompatActivity {
             // TODO : 아래 형식처럼 원하는 key과 value를 계속 추가시킬수있다.
             // 1. PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비합니다.
             String user_email = (String) params[1];
-            String user_carb = (String) params[2];
+            String user_value = (String) params[2];
             String user_date = (String) params[3];
 
             // HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 합니다.
@@ -186,7 +181,7 @@ public class else_record extends AppCompatActivity {
 
             // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
             // ex : String postParameters = "name=" + name + "&country=" + country;
-            String postParameters = "email=" + user_email + "&carb=" + user_carb + "&date=" + user_date;
+            String postParameters = "email=" + user_email + "&value=" + user_value + "&date=" + user_date;
 
             Log.d(TAG, postParameters);
 
