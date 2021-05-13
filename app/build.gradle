@@ -34,6 +34,12 @@ android {
         noCompress "tflite"
         noCompress "lite"
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+
+
 }
 
 repositories {
@@ -65,5 +71,6 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'com.google.firebase:firebase-analytics:18.0.2'
+
 }
 apply plugin: 'com.google.gms.google-services'
