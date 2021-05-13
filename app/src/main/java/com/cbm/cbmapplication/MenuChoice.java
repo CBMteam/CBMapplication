@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
@@ -30,6 +33,12 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -40,6 +49,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,7 +64,6 @@ public class MenuChoice extends AppCompatActivity {
     TextView ml_tteresult;
     Intent intent = getIntent();
     Context mContext = this;
-    Handler handler;
     boolean isRunning;
     int i=0;
     private String IP_ADDRESS = "223.194.46.209";
@@ -67,6 +78,7 @@ public class MenuChoice extends AppCompatActivity {
     private static final int GPS_ENABLE_REQUEST_CODE=2001;
     private static final int PERMISSIONS_REQUEST_CODE=100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+
 
     // String name = intent.getStringExtra("name");
 
@@ -89,8 +101,18 @@ public class MenuChoice extends AppCompatActivity {
         user_email = PreferenceManager.getString(mContext, "user_email");
         Log.d("email",user_email);
 
-        handler=new Handler();
         ThreadClass thread=new ThreadClass();
+        thread.setDaemon(true);
+        thread.start();
+
+
+        // draw chart
+
+        chart = findViewById(R.id.cgmchart);
+
+        MenuChoice.getBloodSugarTask task = new MenuChoice.getBloodSugarTask(MenuChoice.this);
+        task.execute("http://"+IP_ADDRESS+"/getbloodsugarlist.php",user_email);
+
 
         ml_tteresult = (TextView) findViewById(R.id.ml_tteresult);
         ml_tteresult.setText((int)(Math.random()*100)+" 분 뒤");
@@ -140,20 +162,151 @@ public class MenuChoice extends AppCompatActivity {
         // txtView.setText(name);
 
 
-        // draw chart
+    }
 
-        chart = findViewById(R.id.cgmchart);
 
-        ArrayList<Entry> values = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+    public class getBloodSugarTask extends AsyncTask<String, Void, String> {
 
-            float val = (float) (Math.random() * 10);
-            values.add(new Entry(i, val));
+        private static final String TAG = "getBloodSugarTask";
+
+        public Context mContext;
+
+        public getBloodSugarTask(Context mContext) {
+            super();
+
+            this.mContext = mContext;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /* http 연결 진행이 끝나고 난 후에 사용되는곳 (result -> http 연결 후 결과) */
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Log.d(TAG, "response - " + result); //로그로 결과 우선 확인
+            if (result == null) {
+                Log.d(TAG, "result is null - ");
+            } else {
+                showResult(result); //JSON 형태의 결과를 처리
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            // POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않습니다.
+            String serverURL = (String) params[0];
+
+            // TODO : 아래 형식처럼 원하는 key과 value를 계속 추가시킬수있다.
+            // 1. PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비합니다.
+            String user_email = (String) params[1];
+
+            // HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 합니다.
+            // 전송할 데이터는 “이름=값” 형식이며 여러 개를 보내야 할 경우에는 항목 사이에 &를 추가합니다.
+            // 여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 됩니다.
+
+            // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
+            // ex : String postParameters = "name=" + name + "&country=" + country;
+            String postParameters = "user_email="+user_email;
+
+            Log.d(TAG, postParameters);
+
+            StringBuilder jsonHtml = new StringBuilder();
+
+            try {
+                // 2. HttpURLConnection 클래스를 사용하여 POST 방식으로 데이터를 전송합니다.
+                URL url = new URL(serverURL); // 주소가 저장된 변수를 이곳에 입력합니다.
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);//5초안에 응답이 오지 않으면 예외가 발생합니다.
+                httpURLConnection.setConnectTimeout(5000);//5초안에 연결이 안되면 예외가 발생합니다.
+                httpURLConnection.setRequestMethod("POST");//요청 방식을 POST로 합니다.
+                httpURLConnection.connect(); //전송할 데이터가 저장된 변수를 이곳에 입력합니다. 인코딩을 고려해줘야 합니다.
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes(StandardCharsets.UTF_8));//전송할 데이터가 저장된 변수를 이곳에 입력합니다. 인코딩을 고려해줘야 합니다.
+                outputStream.flush();
+                outputStream.close();
+
+                // 3. 응답을 읽습니다.
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) // 정상적인 응답 데이터
+                {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {  // 에러 발생
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                // 4. StringBuilder를 사용하여 수신되는 데이터를 저장합니다.
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                bufferedReader.close();
+                String data = sb.toString().trim();
+
+                return data;
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "getPets: Error ", e);
+                return new String("Error: " + e.getMessage());
+            }
+        }
+
+
+    }
+
+
+    private void showResult(String mJsonString) {
+
+
+        String TAG_JSON = "bloodsugar_list"; //어레이 이름
+        /*php 파일에서 넘긴 json 이름들*/
+        String BLOODSUGAR = "bloodsugar";
+        String FDATE = "fDate";
+
+        ArrayList<Entry> cgm_value_list = new ArrayList<>();
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            //JSON으로 푸시한 전체 데이터 가져오기
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i); //하나 가져오기
+
+                String bloodsugar =  item.getString(BLOODSUGAR);
+                String fDate =  item.getString(FDATE);
+
+                float val = Integer.parseInt(bloodsugar);
+                cgm_value_list.add(new Entry((jsonArray.length()*5 - i*5)*(-1)+5, val));
+
+            }
+        } catch (JSONException e) {
+            //Log.d(TAG, "showResult : ", e);
         }
 
         LineDataSet set1;
-        set1 = new LineDataSet(values, "DataSet 1");
+        set1 = new LineDataSet(cgm_value_list, "혈당값");
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1); // add the data sets
@@ -168,7 +321,9 @@ public class MenuChoice extends AppCompatActivity {
         // set data
         chart.setData(data);
 
-        handler.post(thread);
+        chart.notifyDataSetChanged();
+        chart.invalidate();
+        //adapter.getItemList(board_list);
 
     }
 
@@ -207,13 +362,13 @@ public class MenuChoice extends AppCompatActivity {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
 
-                    Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show();
                     finish();
 
 
                 }else {
 
-                    Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -248,7 +403,7 @@ public class MenuChoice extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MenuChoice.this, REQUIRED_PERMISSIONS[0])) {
 
                 // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Toast.makeText(MenuChoice.this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(MenuChoice.this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
                 // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions(MenuChoice.this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
@@ -292,7 +447,7 @@ public class MenuChoice extends AppCompatActivity {
 
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
 
         }
@@ -364,51 +519,52 @@ public class MenuChoice extends AppCompatActivity {
 
         public void run(){
 
-            if(i==2500){
+            while(true){
 
+                fcmTask fcmtask=new fcmTask(MenuChoice.this);
+                checkTask checktask = new checkTask(MenuChoice.this);
+
+                String result = null;
                 try {
-
-                    String result = checktask.execute("http://" + IP_ADDRESS + "/check.php", user_email).get();
-                    Log.d("핸들러",result);
-
-                    if (result.equals("OK")){
-
-                        Log.d("핸들러","저혈당 발생");
-
-                        //현재 위치 설정
-                        gpsTracker = new GpsTracker(MenuChoice.this);
-
-                        double latitude = gpsTracker.getLatitude();
-                        double longitude = gpsTracker.getLongitude();
-
-                        location = getCurrentAddress(latitude, longitude);
-
-                        Toast.makeText(MenuChoice.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
-                        i=0;
-
-                        //fcm 푸시 메시지 알림 보내기
-                        fcmtask.execute("http://" + IP_ADDRESS + "/fcm.php", user_email,location);
-                    }
-                    else{
-
-                    }
+                    result = checktask.execute("http://" + IP_ADDRESS + "/check.php", user_email).get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                Log.d("핸들러",result);
+
+                if (result.equals("OK")){
+
+                    Log.d("핸들러","저혈당 발생");
+
+                    //현재 위치 설정
+                    gpsTracker = new GpsTracker(MenuChoice.this);
+
+                    double latitude = gpsTracker.getLatitude();
+                    double longitude = gpsTracker.getLongitude();
+
+                    location = getCurrentAddress(latitude, longitude);
+
+                    // Toast.makeText(MenuChoice.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                    i=0;
+
+                    //fcm 푸시 메시지 알림 보내기
+                    fcmtask.execute("http://" + IP_ADDRESS + "/fcm.php", user_email,location);
+                }
+                else{
+                 //       Log.d()
+                }
+
+                try {
+                    Thread.sleep(500000);
+                } catch (InterruptedException e ) {
+                    e.printStackTrace();
+                }
 
             }
-            else{
 
-            }
-            try {
-                Thread.sleep(100);
-                i++;
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            handler.post(this);
+
         }
     }
 

@@ -29,25 +29,30 @@ import java.util.ArrayList;
 
 public class Chart extends AppCompatActivity {
     private LineChart chart;
-
+    private String IP_ADDRESS = "223.194.46.209";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bloodglucose_chart);
 
+
+        String user_email = PreferenceManager.getString(getApplicationContext(), "user_email");
+
         chart = findViewById(R.id.linechart);
 
+        getBloodSugarTask task = new getBloodSugarTask(Chart.this);
+        task.execute("http://"+IP_ADDRESS+"/getbloodsugarlist.php",user_email);
 
     }
 
-    public class getFriendListTask extends AsyncTask<String, Void, String> {
+    public class getBloodSugarTask extends AsyncTask<String, Void, String> {
 
-        private static final String TAG = "getFriendListTask";
+        private static final String TAG = "getBloodSugarTask";
 
         public Context mContext;
 
-        public getFriendListTask(Context mContext) {
+        public getBloodSugarTask(Context mContext) {
             super();
 
             this.mContext = mContext;
