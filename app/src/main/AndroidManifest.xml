@@ -36,7 +36,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAben14yL70YF9Ai8nwdUOC3rNLqg2kyDQ" />
+            android:value="AIzaSyDXNPdPdCg9aseH2o_OyzBl-5kLbrUoMws" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -50,10 +50,9 @@
         <activity android:name=".MapAPItest" />
         <activity android:name=".LoginJoinSelectPage" />
         <activity android:name=".GlobalApplication" />
-        <activity android:name=".MenuChoice" />
+        <activity android:name=".MenuChoice" android:enabled="true" android:exported="true"/>
         <activity android:name=".SendSMS" />
         <activity android:name=".else_record" />
-        <activity android:name=".Chart" />
         <activity android:name=".JoinPage" />
         <activity android:name=".Model" />
         <activity android:name=".FriendRegisterPage" />
@@ -61,7 +60,11 @@
             android:name=".MyFirebaseMessaging"
             android:stopWithTask="false"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:allowBackup="true"
+            android:supportsRtl="true"
+            android:hardwareAccelerated="false"
+            android:largeHeap="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>

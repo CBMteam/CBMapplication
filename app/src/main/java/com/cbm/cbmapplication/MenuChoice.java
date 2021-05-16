@@ -33,9 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,10 +56,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 
 public class MenuChoice extends AppCompatActivity {
 
@@ -85,7 +78,6 @@ public class MenuChoice extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_CODE=100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
 
-    String URL = "http://ad4d33a7ca5f.ngrok.io";
 
     // String name = intent.getStringExtra("name");
 
@@ -120,12 +112,9 @@ public class MenuChoice extends AppCompatActivity {
         MenuChoice.getBloodSugarTask task = new MenuChoice.getBloodSugarTask(MenuChoice.this);
         task.execute("http://"+IP_ADDRESS+"/getbloodsugarlist.php",user_email);
 
-        //tte 받아오기 위한 get 통신
-        String tte = "";
-
 
         ml_tteresult = (TextView) findViewById(R.id.ml_tteresult);
-        ml_tteresult.setText(tte+" 분 뒤");
+        ml_tteresult.setText((int)(Math.random()*100)+" 분 뒤");
 
         ImageButton btn_logout = (ImageButton) findViewById(R.id.logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -169,21 +158,11 @@ public class MenuChoice extends AppCompatActivity {
         });
 
 
+        // txtView.setText(name);
+
+
     }
 
-    //tte받아오기 위해서 get 통신
-    public class Get{
-        OkHttpClient client = new OkHttpClient();
-
-        String run(String url) throws IOException{
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }
-    }
 
 
     public class getBloodSugarTask extends AsyncTask<String, Void, String> {

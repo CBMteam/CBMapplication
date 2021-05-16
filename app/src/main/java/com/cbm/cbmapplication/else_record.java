@@ -104,18 +104,19 @@ public class else_record extends AppCompatActivity {
                 selectHour=tPicker.getHour();
                 selectmin=tPicker.getMinute();
                 String date=Integer.toString(selectYear)+"-"+Integer.toString(selectMonth)+"-"
-                        +Integer.toString(selectDay)+" "+Integer.toString(selectHour)+":"+Integer.toString(selectmin)+":"+"00";
+                        +Integer.toString(selectDay)+"_"+Integer.toString(selectHour)+":"+Integer.toString(selectmin)+":"+"00";
 
                 //일정 내용 받아오기
                 String value=addedit.getText().toString();
 
-                else_record.ElseTask task=new else_record.ElseTask(else_record.this);
 
                if(choice.equals("인슐린")){
-                   task.execute("http://"+IP_ADDRESS+"/carbinsert.php",user_email,value,date);
+                   else_record.ElseTask task=new else_record.ElseTask(else_record.this);
+                   task.execute("http://"+IP_ADDRESS+"/insulininsert.php",user_email,value,date);
                }
                else if(choice.equals("식사량")){
-                   task.execute("http://"+IP_ADDRESS+"/insulininsert.php",user_email,value,date);
+                   else_record.ElseTask task=new else_record.ElseTask(else_record.this);
+                   task.execute("http://"+IP_ADDRESS+"/carbinsert.php",user_email,value,date);
                }
 
                 //일정 추가 완료시 원래 화면으로

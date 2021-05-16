@@ -23,6 +23,10 @@ public class ListViewAdpater extends BaseAdapter {
 
     }
 
+    public void clear() {
+        listViewItemList.clear();
+    }
+
     //Adapter에 사용되는 데이터의 개수를 리턴
     @Override
     public int getCount() {
