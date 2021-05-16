@@ -53,7 +53,6 @@
         <activity android:name=".MenuChoice" android:enabled="true" android:exported="true"/>
         <activity android:name=".SendSMS" />
         <activity android:name=".else_record" />
-        <activity android:name=".Chart" />
         <activity android:name=".JoinPage" />
         <activity android:name=".Model" />
         <activity android:name=".FriendRegisterPage" />

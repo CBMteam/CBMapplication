@@ -1,4 +1,3 @@
-
 package com.cbm.cbmapplication;
 
 import android.Manifest;
@@ -60,6 +59,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MenuChoice extends AppCompatActivity {
 
+    String URL = "http://ad4d33a7ca5f.ngrok.io";
     private LineChart chart;
     TextView ml_tteresult;
     Intent intent = getIntent();
@@ -113,9 +113,21 @@ public class MenuChoice extends AppCompatActivity {
         MenuChoice.getBloodSugarTask task = new MenuChoice.getBloodSugarTask(MenuChoice.this);
         task.execute("http://"+IP_ADDRESS+"/getbloodsugarlist.php",user_email);
 
+        String tte = "";
+
+        MenuChoice.GetTteTask tteTask = new MenuChoice.GetTteTask(MenuChoice.this);
+        try {
+            tte = tteTask.execute(URL+"/tte",user_email).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 
         ml_tteresult = (TextView) findViewById(R.id.ml_tteresult);
-        ml_tteresult.setText((int)(Math.random()*100)+" 분 뒤");
+        ml_tteresult.setText(Math.round(Float.parseFloat(tte))*5+" 분 뒤");
 
         ImageButton btn_logout = (ImageButton) findViewById(R.id.logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +176,118 @@ public class MenuChoice extends AppCompatActivity {
 
     }
 
+    public class GetTteTask extends AsyncTask<String, Void, String> {
+
+        private static final String TAG = "TteTask";
+
+        public Context mContext;
+
+        public GetTteTask(Context mContext) {
+            super();
+
+            this.mContext = mContext;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d(TAG, "POST response  - " + result);
+            if (result.equals("notOK")){
+                dialogGroup.dialogWrongLogin(mContext);
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            // POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않습니다.
+            String serverURL = (String) params[0];
+
+            // TODO : 아래 형식처럼 원하는 key과 value를 계속 추가시킬수있다.
+            // 1. PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비합니다.
+            String user_email = (String) params[1];
+
+            // HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 합니다.
+            // 전송할 데이터는 “이름=값” 형식이며 여러 개를 보내야 할 경우에는 항목 사이에 &를 추가합니다.
+            // 여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 됩니다.
+
+            // TODO : 위에 추가한 형식처럼 아래 postParameters에 key과 value를 계속 추가시키면 끝이다.
+            // ex : String postParameters = "name=" + name + "&country=" + country;
+            String postParameters = "email=" + user_email;
+
+
+            Log.d(TAG, postParameters);
+
+            try {
+                // 2. HttpURLConnection 클래스를 사용하여 POST 방식으로 데이터를 전송합니다.
+                URL url = new URL(serverURL); // 주소가 저장된 변수를 이곳에 입력합니다.
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000); //5초안에 응답이 오지 않으면 예외가 발생합니다.
+
+                httpURLConnection.setConnectTimeout(5000); //5초안에 연결이 안되면 예외가 발생합니다.
+
+                httpURLConnection.setRequestMethod("POST"); //요청 방식을 POST로 합니다.
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8")); //전송할 데이터가 저장된 변수를 이곳에 입력합니다.
+
+                outputStream.flush();
+                outputStream.close();
+
+
+                // 응답을 읽습니다.
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+
+                    // 정상적인 응답 데이터
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+
+                    // 에러 발생
+
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
+        }
+    }
 
 
     public class getBloodSugarTask extends AsyncTask<String, Void, String> {
@@ -368,7 +492,7 @@ public class MenuChoice extends AppCompatActivity {
 
                 }else {
 
-                   // Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(MenuChoice.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -403,7 +527,7 @@ public class MenuChoice extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MenuChoice.this, REQUIRED_PERMISSIONS[0])) {
 
                 // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-              //  Toast.makeText(MenuChoice.this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(MenuChoice.this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
                 // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions(MenuChoice.this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
@@ -553,7 +677,7 @@ public class MenuChoice extends AppCompatActivity {
                     fcmtask.execute("http://" + IP_ADDRESS + "/fcm.php", user_email,location);
                 }
                 else{
-                 //       Log.d()
+                    //       Log.d()
                 }
 
                 try {
