@@ -42,9 +42,12 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
-                .setContentText(messageBody)
+                .setContentText("저혈당 발생 자세한 내용을 보려면 아래로 드래그")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .setBigContentTitle("사용자 위치")
+                        .bigText(messageBody))
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =

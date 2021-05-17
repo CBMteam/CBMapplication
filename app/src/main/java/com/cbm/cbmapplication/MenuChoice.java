@@ -106,6 +106,10 @@ public class MenuChoice extends AppCompatActivity {
         thread.start();
 
 
+        //현재 위치 설정
+        gpsTracker = new GpsTracker(MenuChoice.this);
+
+
         // draw chart
 
         chart = findViewById(R.id.cgmchart);
@@ -558,6 +562,7 @@ public class MenuChoice extends AppCompatActivity {
                     latitude,
                     longitude,
                     7);
+            System.out.println("주"+addresses);
         } catch (IOException ioException) {
             //네트워크 문제
             Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
@@ -662,9 +667,6 @@ public class MenuChoice extends AppCompatActivity {
 
                     Log.d("핸들러","저혈당 발생");
 
-                    //현재 위치 설정
-                    gpsTracker = new GpsTracker(MenuChoice.this);
-
                     double latitude = gpsTracker.getLatitude();
                     double longitude = gpsTracker.getLongitude();
 
@@ -681,7 +683,7 @@ public class MenuChoice extends AppCompatActivity {
                 }
 
                 try {
-                    Thread.sleep(500000);
+                    Thread.sleep(100000);
                 } catch (InterruptedException e ) {
                     e.printStackTrace();
                 }
