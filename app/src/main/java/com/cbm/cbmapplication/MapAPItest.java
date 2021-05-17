@@ -141,7 +141,7 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
                 site+="?location="+currentLocation.getLatitude()+","
                         +currentLocation.getLongitude()
                         +"&radius=10000&sensor=false&language=ko"
-                        +"&key=AIzaSyD8V6U_PIiws20wN9WRHMy7cXCOKcRoPfg";
+                        +"&key=AIzaSyBCGO3L9EoQoYzDVE241hqEDuHhv6shOCM";
                 if(type_keyword!=null && type_keyword.equals("all")==false){
                     site+="&types="+type_keyword;
                 }
@@ -156,6 +156,7 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
                 StringBuffer buf=new StringBuffer();
                 // 읽어온다
                 do{
+                    System.out.println(str);
                     str=br.readLine();
                     if(str!=null){
                         buf.append(str);
@@ -264,7 +265,7 @@ public class MapAPItest extends FragmentActivity implements OnMapReadyCallback {
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I am here!");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         googleMap.addMarker(markerOptions);
     }
     @Override

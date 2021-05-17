@@ -36,7 +36,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD8V6U_PIiws20wN9WRHMy7cXCOKcRoPfg" />
+            android:value="AIzaSyBCGO3L9EoQoYzDVE241hqEDuHhv6shOCM" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -51,7 +51,6 @@
         <activity android:name=".LoginJoinSelectPage" />
         <activity android:name=".GlobalApplication" />
         <activity android:name=".MenuChoice" android:enabled="true" android:exported="true"/>
-        <activity android:name=".SendSMS" />
         <activity android:name=".else_record" />
         <activity android:name=".JoinPage" />
         <activity android:name=".Model" />
