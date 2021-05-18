@@ -1,12 +1,15 @@
 package com.cbm.cbmapplication;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.location.Address;
@@ -39,6 +42,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
@@ -565,10 +569,10 @@ public class MenuChoice extends AppCompatActivity {
             System.out.println("주"+addresses);
         } catch (IOException ioException) {
             //네트워크 문제
-            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
             return "지오코더 서비스 사용불가";
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+  //          Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
 
         }
@@ -643,12 +647,15 @@ public class MenuChoice extends AppCompatActivity {
     }
     //**********************************현재위치 확인 위한 코드******************************//
 
+
     //background에서 실행되는 thread
     class ThreadClass extends Thread {
 
         public void run(){
 
             while(true){
+
+                Log.d("fcm핸들러","유후");
 
                 fcmTask fcmtask=new fcmTask(MenuChoice.this);
                 checkTask checktask = new checkTask(MenuChoice.this);
@@ -661,7 +668,7 @@ public class MenuChoice extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Log.d("핸들러",result);
+                Log.d("fcm핸들러",result);
 
                 if (result.equals("OK")){
 
@@ -673,17 +680,17 @@ public class MenuChoice extends AppCompatActivity {
                     location = getCurrentAddress(latitude, longitude);
 
                     // Toast.makeText(MenuChoice.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
-                    i=0;
 
                     //fcm 푸시 메시지 알림 보내기
                     fcmtask.execute("http://" + IP_ADDRESS + "/fcm.php", user_email,location);
-                }
-                else{
-                    //       Log.d()
+
+
                 }
 
+
                 try {
-                    Thread.sleep(100000);
+
+                    Thread.sleep(300000);
                 } catch (InterruptedException e ) {
                     e.printStackTrace();
                 }
