@@ -68,7 +68,7 @@ public class LoginJoinSelectPage extends AppCompatActivity {
 
                 //fcm 기기의 토큰값과 이메일 값 전달
                 String token= FirebaseInstanceId.getInstance().getToken();
-                Log.d("fcmtoken",token);
+                //Log.d("fcmtoken",token);
 
 
                 if (user_email.length()==0 || user_pw.length() == 0){
@@ -109,7 +109,10 @@ public class LoginJoinSelectPage extends AppCompatActivity {
             }
         });
 
+
+
     }
+
 
 
     public class InsertLoginTask extends AsyncTask<String, Void, String> {

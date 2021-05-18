@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
     private static final String TAG = "FirebaseMsgService";
+    private NotificationCompat.Builder builder;
 
     // [START receive_message]
     @Override
@@ -29,30 +31,49 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                 remoteMessage.getData().get("title"),
                 remoteMessage.getData().get("message")
         );
+
+    }
+
+    // 채널 만들기
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {  //SDK_INT 버전에서 조건에 의해 차단
+            CharSequence name = "channel_name"; //채널이름
+            String description = "channel_description"; //채널설명
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Channel_Id", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void sendNotification(String title, String messageBody) {
+
+        // 다음 스니펫은 사용자가 알림을 탭하면 활동을 여는 기본 인텐트를 만드는 방법을 보여줍니다.
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0); //PendingIntent->앱이 꺼져 있오도 원격으로 킬 수가 있는 거
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        Log.d("fcm",title+"/"+messageBody);
+        // 알림의 콘텐츠와 채널 설정
+        builder = new NotificationCompat.Builder(this, "Channel_Id")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText("저혈당 발생 자세한 내용을 보려면 아래로 드래그")
+                .setContentTitle("저혈당 발생!")
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
+                //BigTextStyle
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .setBigContentTitle("사용자 위치")
+                        .setBigContentTitle(title)
                         .bigText(messageBody))
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-  
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+        // 알림 진짜 띄우게 하는거 (알림 표시)
+        createNotificationChannel();
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.notify(0, builder.build()); // 0 줌
+
     }
 }

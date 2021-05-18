@@ -1,16 +1,22 @@
 package com.cbm.cbmapplication;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +33,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         getHashKey();
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -53,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        Intent serviceintent=new Intent(MainActivity.this,MenuChoice.class);
+        startService(serviceintent);
 
     }
 
@@ -80,3 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
+
