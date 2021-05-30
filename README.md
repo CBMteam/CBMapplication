@@ -19,9 +19,9 @@
 
 ### 캡쳐 화면
 
-<img width="300" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105180-ccc85880-c192-11eb-9306-41af9deec3d4.png">
-<img width="300" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105230-05683200-c193-11eb-859f-1e9d16671cc0.png">
-<img width="300" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105236-0bf6a980-c193-11eb-881a-a0a2220c609f.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105180-ccc85880-c192-11eb-9306-41af9deec3d4.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105230-05683200-c193-11eb-859f-1e9d16671cc0.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105236-0bf6a980-c193-11eb-881a-a0a2220c609f.png">
 
 <br>
 
