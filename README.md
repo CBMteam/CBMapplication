@@ -19,27 +19,35 @@
 
 ### 캡쳐 화면
 
+<p>
 <img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105180-ccc85880-c192-11eb-9306-41af9deec3d4.png">
 <img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105230-05683200-c193-11eb-859f-1e9d16671cc0.png">
 <img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105236-0bf6a980-c193-11eb-881a-a0a2220c609f.png">
+</p>
 
 <br>
 
-![image](https://user-images.githubusercontent.com/65345381/120105237-1022c700-c193-11eb-81b3-d2c54fb64f14.png)
-![image](https://user-images.githubusercontent.com/65345381/120105240-11ec8a80-c193-11eb-8b3c-fd6eb59e3be4.png)
-![image](https://user-images.githubusercontent.com/65345381/120105250-1d3fb600-c193-11eb-98ff-a5dadca48258.png)
-
+<p>
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105237-1022c700-c193-11eb-81b3-d2c54fb64f14.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105240-11ec8a80-c193-11eb-8b3c-fd6eb59e3be4.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105250-1d3fb600-c193-11eb-98ff-a5dadca48258.png">
+</p>
+	
 <br>
 
-![image](https://user-images.githubusercontent.com/65345381/120105256-23359700-c193-11eb-9c51-f19bbda59379.png)
-![image](https://user-images.githubusercontent.com/65345381/120105257-24ff5a80-c193-11eb-983f-78b2826de3e6.png)
-![image](https://user-images.githubusercontent.com/65345381/120105261-2761b480-c193-11eb-958c-3a897b088726.png)
-
+<p>
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105256-23359700-c193-11eb-9c51-f19bbda59379.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105257-24ff5a80-c193-11eb-983f-78b2826de3e6.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105261-2761b480-c193-11eb-958c-3a897b088726.png">
+</p>
+	
 <br>
 
-![image](https://user-images.githubusercontent.com/65345381/120105265-2c266880-c193-11eb-97a9-aed9fab8afe7.png)
-![image](https://user-images.githubusercontent.com/65345381/120105268-2df02c00-c193-11eb-82fc-869da82da03c.png)
-![image](https://user-images.githubusercontent.com/65345381/120105271-3183b300-c193-11eb-9633-8a9bcf07dd07.png)
+<p>
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105265-2c266880-c193-11eb-97a9-aed9fab8afe7.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105268-2df02c00-c193-11eb-82fc-869da82da03c.png">
+<img width="150" alt="캡처" src="https://user-images.githubusercontent.com/65345381/120105271-3183b300-c193-11eb-9633-8a9bcf07dd07.png">
+</p>
 
 
 
